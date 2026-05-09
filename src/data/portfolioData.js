@@ -61,59 +61,59 @@ export const PORTFOLIO_DATA = {
       id: 1,
       title: "EfficientNetB3 Architecture for High-Resolution Medical Imaging",
       conference: "ICCIT 2025",
-      type: "Accepted Paper",
+      type: "Published",
       year: "2025",
       description: "An optimized implementation of EfficientNetB3 tailored for identifying anomalies in high-resolution MRI scans, achieving a 12% improvement in inference speed with minimal accuracy tradeoff.",
-      link: "#",
-      image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=900"
+      link: "https://ieeexplore.ieee.org/document/11491802",
+      image: "/HPO%20Algo.png"
     },
     {
       id: 2,
       title: "Automated Job Recommendation Pipelines using Graph Neural Networks",
       conference: "ICCIT 2025",
-      type: "Accepted Paper",
+      type: "Published",
       year: "2025",
       description: "Proposed a novel GNN-based recommendation system that models applicant-to-job fit across heterogeneous graphs, outperforming traditional collaborative filtering baselines.",
-      link: "#",
-      image: "https://images.unsplash.com/photo-1518133910546-b6c2fb7d79e3?auto=format&fit=crop&q=80&w=900"
+      link: "https://ieeexplore.ieee.org/document/11491820",
+      image: "/JobRecommend.png"
     }
   ],
   achievements: [
     {
       id: 1,
-      title: "HSIL Hackathon 2026",
-      role: "Finalist / Winner",
-      date: "2026",
-      description: "Developed an innovative solution for real-time data processing, securing a top position among 50+ competing teams.",
+      title: "Professional Case Study, Procon 2023",
+      role: "CHAMPION",
+      date: "2023",
+      description: "Proposed multi-dimensional solution to prevent malpractice and immoral use on Social Media platform. Among them Algorithmic Bias Strategies to identify fake accounts and bot identification, Benford algorithm implementation, and robust security system awareness are the major ones.",
       icon: "💻",
       accent: "from-purple-500 to-blue-500",
       border: "border-purple-500/30",
       glow: "shadow-purple-500/10",
-      image: "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?auto=format&fit=crop&q=80&w=900"
+      image: "/ieee_case_champ.jpeg"
     },
     {
       id: 2,
-      title: "Hult Prize Global Competition",
-      role: "Campus Winner",
+      title: "Casecraft AutoRealm ",
+      role: "Second Runner-Up",
       date: "2024",
-      description: "Pitched a sustainable business model leveraging AI for social impact, winning the campus round and advancing to the regionals.",
+      description: "In this competition we were give a case file to address security issues in a vehicle manufactured by a Bangladeshi company. Additionally, we introduced a mobile app prototype based on Machine Learning to enhance safety measures and presented a comprehensive business plan outlining strategies to compete in today's dynamic business environment.",
       icon: "🏆",
       accent: "from-amber-500 to-orange-500",
       border: "border-amber-500/30",
       glow: "shadow-amber-500/10",
-      image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=900"
+      image: "/case_craft.jpeg"
     },
     {
       id: 3,
-      title: "National Programming Contest",
+      title: "National Round, TechnoXian Bangladesh National Championship",
       role: "Top 10 Finalist",
-      date: "2023",
-      description: "Competed in the national-level algorithmic programming contest, reaching the top 10 among 300+ participants.",
+      date: "2024",
+      description: "This competition was aimed at making robotics more relatable and accessible to a wider audience. Out of 200 participating teams, only 7 advanced to the final round held at AlUB on 8 March 2024.",
       icon: "⚡",
       accent: "from-cyan-500 to-teal-500",
       border: "border-cyan-500/30",
       glow: "shadow-cyan-500/10",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=900"
+      image: "/Techno_Final.jpeg"
     }
   ]
 };

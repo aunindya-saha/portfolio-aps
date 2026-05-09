@@ -12,7 +12,18 @@ const ratelimit = new Ratelimit({
   analytics: true,
 });
 
-import { PORTFOLIO_DATA } from "../src/data/portfolioData.js";
+// Clean, text-based portfolio summary to avoid Vercel JSX/Import crashes
+const portfolioSummary = `
+Name: Aunindya Prosad Saha
+Education: Undergraduate Level 4 student, Dept of CSE at MIST (Military Institute of Science and Technology), Dhaka. Graduating in June 2026.
+Expertise: Full-Stack Web Dev (React, Next.js, Supabase), AI & Machine Learning (LLMs, CNNs, Hyperparameter Optimization), and C++ Competitive Programming.
+Key Projects:
+1. Automated Landslide Detection System (YOLOv8)
+2. AI-Powered Job Recommendation Engine (GNN, FastAPI)
+3. Medical Imaging Anomaly Detector (EfficientNetB3)
+Achievements: 2 research papers accepted at ICCIT 2025. Participated in Hult Prize 2024 and HSIL Hackathon 2026.
+Goals: Applying for higher studies in Germany and New Zealand for 2026-2027.
+`;
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -21,7 +32,7 @@ export default async function handler(req, res) {
 
   try {
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'anonymous';
-    
+
     if (process.env.UPSTASH_REDIS_REST_URL) {
       const { success } = await ratelimit.limit(`chat_${ip}`);
       if (!success) {
@@ -32,7 +43,7 @@ export default async function handler(req, res) {
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
     let { messages } = body;
 
-    const systemPrompt = `You are Anindita, the official AI assistant representing Aunindya Prosad Saha. You are talking to a VISITOR, not Aunindya. Greet the visitor warmly on Aunindya's behalf, keep answers short, and help them explore the portfolio. Answer based on this latest data: ${JSON.stringify(PORTFOLIO_DATA)}`;
+    const systemPrompt = `You are Anindita, the official AI assistant representing Aunindya Prosad Saha. You are talking to a VISITOR, not Aunindya. Greet the visitor warmly on Aunindya's behalf, keep answers short (2-3 sentences max), and help them explore the portfolio. Base your knowledge ONLY on this data: ${portfolioSummary}`;
 
     messages = messages.filter(m => m.role !== 'system');
     messages.unshift({ role: "system", content: systemPrompt });
@@ -44,7 +55,7 @@ export default async function handler(req, res) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "llama3-8b-8192",
+        model: "llama-3.1-8b-instant",
         messages: messages,
       })
     });

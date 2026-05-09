@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Code, Briefcase, Mail, X, Send, Image } from "lucide-react";
+import { Code, X, Send, Image } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Tilt from "react-parallax-tilt";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -7,7 +7,7 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { createClient } from "@supabase/supabase-js";
 import { Typewriter } from "react-simple-typewriter";
 
-export const supabase = import.meta.env.VITE_SUPABASE_URL 
+export const supabase = import.meta.env.VITE_SUPABASE_URL
   ? createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY)
   : null;
 
@@ -124,7 +124,7 @@ export const Hero = () => {
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
               </span>
               <span className="text-sm font-mono text-zinc-600 dark:text-zinc-300 group-hover:hidden block">
-                🟢 Live: {activeUsers} visitors online
+                Live: {activeUsers} visitors online
               </span>
               <span className="text-sm font-mono text-emerald-500 hidden group-hover:block">
                 Open Neural Uplink ↑
@@ -133,9 +133,37 @@ export const Hero = () => {
           </div>
 
           <div className="flex items-center gap-6">
-            <SocialLink href="https://github.com/anindosaha16" icon={<Code className="w-6 h-6" />} label="GitHub" />
-            <SocialLink href="https://linkedin.com/in/aunindya" icon={<Briefcase className="w-6 h-6" />} label="LinkedIn" />
-            <SocialLink href="mailto:anindosaha16@gmail.com" icon={<Mail className="w-6 h-6" />} label="Email" />
+            <SocialLink
+              href="https://github.com/aunindya-saha/portfolio-aps.git"
+              label="GitHub"
+              icon={
+                <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 fill-current">
+                  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                </svg>
+              }
+            />
+            <SocialLink
+              href="https://linkedin.com/in/aunindya"
+              label="LinkedIn"
+              icon={
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" className="w-5 h-5 fill-current">
+                  <path d="M512 96L127.9 96C110.3 96 96 110.5 96 128.3L96 511.7C96 529.5 110.3 544 127.9 544L512 544C529.6 544 544 529.5 544 511.7L544 128.3C544 110.5 529.6 96 512 96zM231.4 480L165 480L165 266.2L231.5 266.2L231.5 480L231.4 480zM198.2 160C219.5 160 236.7 177.2 236.7 198.5C236.7 219.8 219.5 237 198.2 237C176.9 237 159.7 219.8 159.7 198.5C159.7 177.2 176.9 160 198.2 160zM480.3 480L413.9 480L413.9 376C413.9 351.2 413.4 319.3 379.4 319.3C344.8 319.3 339.5 346.3 339.5 374.2L339.5 480L273.1 480L273.1 266.2L336.8 266.2L336.8 295.4L337.7 295.4C346.6 278.6 368.3 260.9 400.6 260.9C467.8 260.9 480.3 305.2 480.3 362.8L480.3 480z" />
+                </svg>
+              }
+            />
+            <SocialLink
+              href="mailto:anindosaha16@gmail.com"
+              label="Email"
+              icon={
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 193" className="w-5 h-5">
+                  <path fill="#4285F4" d="M58.182 192.05V93.14L27.507 65.077L0 49.504v125.091c0 9.658 7.825 17.455 17.455 17.455z" />
+                  <path fill="#34A853" d="M197.818 192.05h40.727c9.659 0 17.455-7.826 17.455-17.455V49.505l-31.156 17.837l-27.026 25.798z" />
+                  <path fill="#EA4335" d="m58.182 93.14l-4.174-38.647l4.174-36.989L128 69.868l69.818-52.364l4.669 34.992l-4.669 40.644L128 145.504z" />
+                  <path fill="#FBBC04" d="M197.818 17.504V93.14L256 49.504V26.231c0-21.585-24.64-33.89-41.89-20.945z" />
+                  <path fill="#C5221F" d="m0 49.504l26.759 20.07L58.182 93.14V17.504L41.89 5.286C24.61-7.66 0 4.646 0 26.23z" />
+                </svg>
+              }
+            />
           </div>
         </motion.div>
       </div>
@@ -236,12 +264,12 @@ const SocialLink = ({ href, icon, label }) => (
 
 const LiveChatModal = ({ isOpen, onClose, activeUsers }) => {
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
-  const [input, setInput] = useState("");
   const [showGifPicker, setShowGifPicker] = useState(false);
   const [tooltip, setTooltip] = useState(null);
   const [gifs, setGifs] = useState([]);
   const [guestName, setGuestName] = useState("");
   const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     let name = localStorage.getItem('guestName');
@@ -300,36 +328,33 @@ const LiveChatModal = ({ isOpen, onClose, activeUsers }) => {
 
   const handleSend = async (e) => {
     e.preventDefault();
-    if (!input.trim()) return;
-    
+    const currentInput = inputRef.current?.value?.trim();
+    if (!currentInput) return;
+
     if (!supabase) {
       alert("Database connection missing. Please restart Vercel dev.");
       return;
     }
 
-    const currentInput = input;
     const optimisticMsg = {
       id: Date.now(),
-      anonymous_name: guestName, 
-      message: currentInput, 
-      is_gif: false 
+      anonymous_name: guestName,
+      message: currentInput,
+      is_gif: false
     };
-    
+
     setMessages(prev => [...prev, optimisticMsg]);
-    setInput("");
+    // Clear imperatively — zero re-renders from the input
+    if (inputRef.current) inputRef.current.value = "";
     setShowGifPicker(false);
 
     try {
-      const { error } = await supabase.from('live_messages').insert([
-        { 
-          anonymous_name: optimisticMsg.anonymous_name, 
-          message: currentInput, 
-          is_gif: false 
-        }
-      ]);
-      if (error) {
-        console.error("Error sending message:", error);
-      }
+      const { error } = await supabase.from('live_messages').insert([{
+        anonymous_name: optimisticMsg.anonymous_name,
+        message: currentInput,
+        is_gif: false
+      }]);
+      if (error) console.error("Error sending message:", error);
     } catch (err) {
       console.error("Crash during send:", err);
     }
@@ -337,23 +362,23 @@ const LiveChatModal = ({ isOpen, onClose, activeUsers }) => {
 
   const handleGifSend = async (gif) => {
     if (!supabase) return;
-    
+
     const optimisticMsg = {
       id: Date.now(),
-      anonymous_name: guestName, 
-      message: gif.media[0].gif.url, 
-      is_gif: true 
+      anonymous_name: guestName,
+      message: gif.media[0].gif.url,
+      is_gif: true
     };
-    
+
     setMessages(prev => [...prev, optimisticMsg]);
     setShowGifPicker(false);
 
     try {
       const { error } = await supabase.from('live_messages').insert([
-        { 
-          anonymous_name: optimisticMsg.anonymous_name, 
-          message: gif.media[0].gif.url, 
-          is_gif: true 
+        {
+          anonymous_name: optimisticMsg.anonymous_name,
+          message: gif.media[0].gif.url,
+          is_gif: true
         }
       ]);
       if (error) console.error("Error sending GIF:", error);
@@ -459,11 +484,11 @@ const LiveChatModal = ({ isOpen, onClose, activeUsers }) => {
                 <div className="p-3">
                   <div className="flex justify-between items-center mb-2">
                     <p className="text-zinc-500 font-mono text-[10px] uppercase tracking-wider">GIF Library</p>
-                    <input 
-                      type="text" 
-                      placeholder="Search GIFs..." 
-                      onChange={(e) => fetchGifs(e.target.value)} 
-                      className="bg-zinc-950 border border-zinc-800 rounded px-2 py-1 text-[10px] text-zinc-200 focus:outline-none focus:border-emerald-500/50 font-mono w-32" 
+                    <input
+                      type="text"
+                      placeholder="Search GIFs..."
+                      onChange={(e) => fetchGifs(e.target.value)}
+                      className="bg-zinc-950 border border-zinc-800 rounded px-2 py-1 text-[10px] text-zinc-200 focus:outline-none focus:border-emerald-500/50 font-mono w-32"
                     />
                   </div>
                   <div className="grid grid-cols-3 md:grid-cols-4 gap-2 max-h-40 overflow-y-auto custom-scrollbar">
@@ -497,9 +522,8 @@ const LiveChatModal = ({ isOpen, onClose, activeUsers }) => {
               <Image className="w-4 h-4" />
             </button>
             <input
+              ref={inputRef}
               type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
               placeholder="Transmit payload..."
               className="flex-1 bg-zinc-950 border border-zinc-800 rounded-full px-4 py-2 text-sm text-zinc-200 focus:outline-none focus:border-emerald-500/50 font-mono"
             />

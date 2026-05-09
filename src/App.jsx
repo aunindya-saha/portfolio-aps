@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { ParticleBackground } from "./components/ParticleBackground";
 import { Navbar } from "./components/Navbar";
 import { ChatbotShell } from "./components/ChatbotShell";
+import { Footer } from "./components/Footer";
 import { Home } from "./pages/Home";
 import { Insights } from "./pages/Insights";
 import { ExperiencePage } from "./pages/ExperiencePage";
@@ -54,6 +55,7 @@ function App() {
             <Route path="/experience" element={<ExperiencePage />} />
           </Routes>
         </main>
+        <Footer />
       </div>
 
       <ChatbotShell />

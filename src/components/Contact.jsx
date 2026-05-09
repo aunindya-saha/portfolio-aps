@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { Send, MapPin, Mail } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const SOCIAL_LINKS = [
   {
     label: "LinkedIn",
-    href: "https://linkedin.com/in/aunindya",
+    href: "https://www.linkedin.com/in/aunindyasaha/",
     icon: "https://cdn.simpleicons.org/linkedin/0A66C2",
     hoverColor: "hover:border-[#0A66C2]/50 hover:shadow-[#0A66C2]/10"
   },
@@ -24,21 +24,26 @@ const SOCIAL_LINKS = [
 ];
 
 export const Contact = () => {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
+  const messageRef = useRef(null);
   const [status, setStatus] = useState("idle"); // idle | loading | success | error | ratelimit
   const [errorMsg, setErrorMsg] = useState("");
 
-  const handleChange = (e) => {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    const formData = {
+      name: nameRef.current.value,
+      email: emailRef.current.value,
+      message: messageRef.current.value,
+    };
     setStatus("success");
     setErrorMsg("");
-    
-    const formData = { ...form };
-    setForm({ name: "", email: "", message: "" });
+
+    // Clear fields imperatively — zero re-renders
+    nameRef.current.value = "";
+    emailRef.current.value = "";
+    messageRef.current.value = "";
 
     // Fire and forget fetch
     fetch("/api/email", {
@@ -76,10 +81,9 @@ export const Contact = () => {
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-slate-700 dark:text-zinc-300">Name</label>
                 <input
+                  ref={nameRef}
                   type="text"
                   name="name"
-                  value={form.name}
-                  onChange={handleChange}
                   required
                   placeholder="John Doe"
                   className="w-full bg-slate-100/50 dark:bg-zinc-900/50 border border-slate-200 dark:border-zinc-800 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-slate-800 dark:text-zinc-200"
@@ -88,10 +92,9 @@ export const Contact = () => {
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-slate-700 dark:text-zinc-300">Email</label>
                 <input
+                  ref={emailRef}
                   type="email"
                   name="email"
-                  value={form.email}
-                  onChange={handleChange}
                   required
                   placeholder="john@example.com"
                   className="w-full bg-slate-100/50 dark:bg-zinc-900/50 border border-slate-200 dark:border-zinc-800 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-slate-800 dark:text-zinc-200"
@@ -102,9 +105,8 @@ export const Contact = () => {
             <div className="space-y-1.5">
               <label className="text-sm font-medium text-slate-700 dark:text-zinc-300">Message</label>
               <textarea
+                ref={messageRef}
                 name="message"
-                value={form.message}
-                onChange={handleChange}
                 required
                 rows="5"
                 placeholder="How can we collaborate?"
