@@ -68,7 +68,7 @@ export const Projects = () => {
       {/* Star motivation */}
       <div className="mb-10 flex items-center gap-2 text-sm text-amber-500 dark:text-amber-400 font-mono">
         <Star className="w-4 h-4 fill-current" />
-        <span>If you find this helpful, don't forget to give it a star on GitHub!</span>
+        <span>If you find the project helpful, don't forget to give it a star on GitHub!</span>
       </div>
 
       <div ref={scrollRef} className="[&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] flex overflow-x-auto snap-x snap-mandatory gap-6 pb-4">

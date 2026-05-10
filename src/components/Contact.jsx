@@ -2,11 +2,17 @@ import { motion } from "framer-motion";
 import { Send, MapPin, Mail } from "lucide-react";
 import { useState, useRef } from "react";
 
+const LinkedInIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" className="w-5 h-5 fill-current text-[#0A66C2]">
+    <path d="M512 96L127.9 96C110.3 96 96 110.5 96 128.3L96 511.7C96 529.5 110.3 544 127.9 544L512 544C529.6 544 544 529.5 544 511.7L544 128.3C544 110.5 529.6 96 512 96zM231.4 480L165 480L165 266.2L231.5 266.2L231.5 480L231.4 480zM198.2 160C219.5 160 236.7 177.2 236.7 198.5C236.7 219.8 219.5 237 198.2 237C176.9 237 159.7 219.8 159.7 198.5C159.7 177.2 176.9 160 198.2 160zM480.3 480L413.9 480L413.9 376C413.9 351.2 413.4 319.3 379.4 319.3C344.8 319.3 339.5 346.3 339.5 374.2L339.5 480L273.1 480L273.1 266.2L336.8 266.2L336.8 295.4L337.7 295.4C346.6 278.6 368.3 260.9 400.6 260.9C467.8 260.9 480.3 305.2 480.3 362.8L480.3 480z" />
+  </svg>
+);
+
 const SOCIAL_LINKS = [
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/aunindyasaha/",
-    icon: "https://cdn.simpleicons.org/linkedin/0A66C2",
+    icon: <LinkedInIcon />,
     hoverColor: "hover:border-[#0A66C2]/50 hover:shadow-[#0A66C2]/10"
   },
   {
@@ -181,7 +187,11 @@ export const Contact = () => {
                     title={label}
                     className={`w-10 h-10 rounded-xl border border-slate-200 dark:border-zinc-800 flex items-center justify-center bg-white/50 dark:bg-zinc-900/50 transition-all duration-200 shadow-sm hover:shadow-md ${hoverColor}`}
                   >
-                    <img src={icon} alt={label} className="w-5 h-5" />
+                    {typeof icon === "string" ? (
+                      <img src={icon} alt={label} loading="lazy" className="w-5 h-5" />
+                    ) : (
+                      icon
+                    )}
                   </a>
                 ))}
               </div>

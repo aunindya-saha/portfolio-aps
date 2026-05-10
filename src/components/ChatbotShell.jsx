@@ -65,10 +65,10 @@ export const ChatbotShell = () => {
       const data = await response.json();
       const assistantContent = data.choices?.[0]?.message?.content || "Sorry, I couldn't process that. Please try again.";
       setMessages(prev => [...prev, { role: "assistant", content: assistantContent }]);
-    } catch (err) {
+    } catch {
       setMessages(prev => [...prev, {
         role: "assistant",
-        content: `⚠️ Error: ${err.message}`
+        content: "I'm currently stepping away from my desk to assist Aunindya. Please feel free to explore the website, or you can email him directly at **anindosaha16@gmail.com**!"
       }]);
     } finally {
       setIsLoading(false);

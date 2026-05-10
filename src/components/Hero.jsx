@@ -143,7 +143,7 @@ export const Hero = () => {
               }
             />
             <SocialLink
-              href="https://linkedin.com/in/aunindya"
+              href="https://www.linkedin.com/in/aunindyasaha/"
               label="LinkedIn"
               icon={
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" className="w-5 h-5 fill-current">

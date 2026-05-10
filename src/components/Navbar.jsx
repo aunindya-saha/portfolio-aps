@@ -54,8 +54,8 @@ export const Navbar = ({ darkMode, setDarkMode }) => {
           </span>
         </Link>
 
-        {/* Desktop nav */}
-        <nav className="rounded-full backdrop-blur-md px-8 py-1.5 flex items-center justify-center gap-6 dark:text-white text-black bg-white/50 dark:bg-zinc-900/50 shadow-lg w-fit">
+        {/* Desktop nav — hidden on mobile */}
+        <nav className="hidden md:flex rounded-full backdrop-blur-md px-8 py-1.5 items-center justify-center gap-6 dark:text-white text-black bg-white/50 dark:bg-zinc-900/50 shadow-lg w-fit">
           {/* Anchor Links for Landing Page */}
           {['skills', 'projects', 'research', 'achievements'].map((id) => (
             <a 
