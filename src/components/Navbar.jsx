@@ -5,14 +5,14 @@ import { useState } from "react";
 
 const ANCHOR_LINKS = [
   { label: "Tech Stack", hash: "#skills" },
-  { label: "Projects",   hash: "#projects" },
-  { label: "Research",   hash: "#research" },
-  { label: "Achievements", hash: "#achievements" },
 ];
 
 const ROUTE_LINKS = [
-  { label: "Experience", to: "/experience" },
-  { label: "Insights",   to: "/insights" },
+  { label: "Projects",     to: "/projects" },
+  { label: "Research",     to: "/research" },
+  { label: "Achievements", to: "/achievements" },
+  { label: "Experience",   to: "/experience" },
+  { label: "Insights",     to: "/insights" },
 ];
 
 export const Navbar = ({ darkMode, setDarkMode }) => {
@@ -56,21 +56,30 @@ export const Navbar = ({ darkMode, setDarkMode }) => {
 
         {/* Desktop nav — hidden on mobile */}
         <nav className="hidden md:flex rounded-full backdrop-blur-md px-8 py-1.5 items-center justify-center gap-6 dark:text-white text-black bg-white/50 dark:bg-zinc-900/50 shadow-lg w-fit">
-          {/* Anchor Links for Landing Page */}
-          {['skills', 'projects', 'research', 'achievements'].map((id) => (
-            <a 
-              key={id} 
-              href={`/#${id}`} 
-              onClick={(e) => handleAnchorClick(e, `#${id}`)}
-              className="text-sm font-medium hover:text-blue-500 transition-colors capitalize"
+          {/* Anchor Links for Landing Page sections */}
+          {ANCHOR_LINKS.map(({ label, hash }) => (
+            <a
+              key={hash}
+              href={"/" + hash}
+              onClick={(e) => handleAnchorClick(e, hash)}
+              className="text-sm font-medium hover:text-blue-500 transition-colors"
             >
-              {id.replace('-', ' ')}
+              {label}
             </a>
           ))}
 
-          {/* Standard Route Links */}
-          <Link to="/experience" className="text-sm font-medium hover:text-blue-500 transition-colors">Experience</Link>
-          <Link to="/insights" className="text-sm font-medium hover:text-blue-500 transition-colors">Insights</Link>
+          {/* Route Links — dedicated pages */}
+          {ROUTE_LINKS.map(({ label, to }) => (
+            <Link
+              key={to}
+              to={to}
+              className={`text-sm font-medium hover:text-blue-500 transition-colors ${
+                location.pathname === to ? "text-blue-500" : ""
+              }`}
+            >
+              {label}
+            </Link>
+          ))}
         </nav>
 
         {/* Right controls */}

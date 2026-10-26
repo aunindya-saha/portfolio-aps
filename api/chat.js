@@ -51,7 +51,7 @@ async function postJson(url, headers, body) {
 
 // ── Providers (each is used only if its key exists; first success wins) ────────
 async function askGemini(system, turns) {
-  const model = process.env.GEMINI_MODEL || "gemini-2.5-flash-lite";
+  const model = process.env.GEMINI_MODEL || "gemini-2.5-flash";
   const contents = turns.map((m) => ({
     role: m.role === "assistant" ? "model" : "user",
     parts: [{ text: m.content }],
