@@ -2,8 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, X, Terminal, Send, Loader } from "lucide-react";
 
-const SYSTEM_PROMPT = `You are Aunindya, the official AI assistant representing Aunindya Prosad Saha. You are talking to a VISITOR, not Aunindya. Greet the visitor warmly on Aunindya's behalf, keep answers short, and help them explore the portfolio.`;
-
 export const ChatbotShell = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isIdentified, setIsIdentified] = useState(false);
@@ -41,10 +39,7 @@ export const ChatbotShell = () => {
     setIsLoading(true);
 
     try {
-      const apiMessages = [
-        { role: "system", content: SYSTEM_PROMPT },
-        ...newMessages
-      ];
+      const apiMessages = newMessages;
 
       const response = await fetch("/api/chat", {
         method: "POST",

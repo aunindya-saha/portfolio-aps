@@ -37,27 +37,42 @@ const INITIAL_MESSAGES = [
 export const Hero = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [activeUsers, setActiveUsers] = useState(0);
+  const [totalVisits, setTotalVisits] = useState(null);
+
+  // Count this browser once per session in Supabase (see supabase/site_visits.sql) and show the all-time total.
+  useEffect(() => {
+    if (!supabase) return;
+    let cancelled = false;
+    const KEY = "visitTotal";
+    let cached = null;
+    try { cached = sessionStorage.getItem(KEY); } catch { /* storage blocked */ }
+    if (cached) { setTotalVisits(Number(cached)); return; }
+    supabase.rpc("increment_visits").then(({ data, error }) => {
+      if (error || cancelled || typeof data !== "number") return;
+      try { sessionStorage.setItem(KEY, String(data)); } catch { /* storage blocked */ }
+      setTotalVisits(data);
+    });
+    return () => { cancelled = true; };
+  }, []);
 
   useEffect(() => {
     if (!supabase) return;
-    const presenceChannel = supabase.channel('online-users', {
-      config: { presence: { key: 'visitor' } },
-    });
+    // Unique ID per tab — prevents all clients sharing one presence key
+    const userId = crypto.randomUUID();
+    const roomOne = supabase.channel('online-users');
 
-    presenceChannel
+    roomOne
       .on('presence', { event: 'sync' }, () => {
-        const state = presenceChannel.presenceState();
-        const count = Object.keys(state).length;
-        setActiveUsers(count);
+        setActiveUsers(Object.keys(roomOne.presenceState()).length);
       })
       .subscribe(async (status) => {
         if (status === 'SUBSCRIBED') {
-          await presenceChannel.track({ online_at: new Date().toISOString() });
+          await roomOne.track({ user_id: userId, online_at: new Date().toISOString() });
         }
       });
 
     return () => {
-      supabase.removeChannel(presenceChannel);
+      supabase.removeChannel(roomOne);
     };
   }, []);
 
@@ -117,17 +132,14 @@ export const Hero = () => {
               onClick={() => setIsChatOpen(true)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-md cursor-pointer group transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-md cursor-pointer transition-all hover:bg-white/10 hover:ring-2 hover:ring-blue-500/50"
             >
               <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="animate-pulse absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
               </span>
-              <span className="text-sm font-mono text-zinc-600 dark:text-zinc-300 group-hover:hidden block">
-                Live: {activeUsers} visitors online
-              </span>
-              <span className="text-sm font-mono text-emerald-500 hidden group-hover:block">
-                Open Neural Uplink ↑
+              <span className="text-sm font-mono text-zinc-600 dark:text-zinc-300">
+                💬 Join the Network (🟢 {activeUsers} Live{totalVisits ? ` · ${totalVisits.toLocaleString()} visits` : ""})
               </span>
             </motion.button>
           </div>
@@ -150,6 +162,11 @@ export const Hero = () => {
                   <path d="M512 96L127.9 96C110.3 96 96 110.5 96 128.3L96 511.7C96 529.5 110.3 544 127.9 544L512 544C529.6 544 544 529.5 544 511.7L544 128.3C544 110.5 529.6 96 512 96zM231.4 480L165 480L165 266.2L231.5 266.2L231.5 480L231.4 480zM198.2 160C219.5 160 236.7 177.2 236.7 198.5C236.7 219.8 219.5 237 198.2 237C176.9 237 159.7 219.8 159.7 198.5C159.7 177.2 176.9 160 198.2 160zM480.3 480L413.9 480L413.9 376C413.9 351.2 413.4 319.3 379.4 319.3C344.8 319.3 339.5 346.3 339.5 374.2L339.5 480L273.1 480L273.1 266.2L336.8 266.2L336.8 295.4L337.7 295.4C346.6 278.6 368.3 260.9 400.6 260.9C467.8 260.9 480.3 305.2 480.3 362.8L480.3 480z" />
                 </svg>
               }
+            />
+            <SocialLink
+              href="https://scholar.google.com/citations?user=3mi0x1kAAAAJ&hl=en"
+              label="Google Scholar"
+              icon={<img src="https://cdn.simpleicons.org/googlescholar/4285F4" alt="" className="w-5 h-5" />}
             />
             <SocialLink
               href="mailto:anindosaha16@gmail.com"
@@ -270,6 +287,7 @@ const LiveChatModal = ({ isOpen, onClose, activeUsers }) => {
   const [guestName, setGuestName] = useState("");
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
+  const gifSearchRef = useRef(null);
 
   useEffect(() => {
     let name = localStorage.getItem('guestName');
@@ -280,8 +298,10 @@ const LiveChatModal = ({ isOpen, onClose, activeUsers }) => {
     setGuestName(name);
 
     if (supabase) {
-      supabase.from('live_messages').select('*').order('created_at', { ascending: true }).limit(50)
-        .then(({ data, error }) => {
+      // Newest 50 messages, shown oldest -> newest, so history keeps appearing after 50+ messages.
+      supabase.from('live_messages').select('*').order('created_at', { ascending: false }).limit(50)
+        .then(({ data: latest, error }) => {
+          const data = latest ? [...latest].reverse() : latest;
           if (data && !error) {
             setMessages(prev => {
               const ids = new Set(prev.map(m => m.id));
@@ -485,9 +505,10 @@ const LiveChatModal = ({ isOpen, onClose, activeUsers }) => {
                   <div className="flex justify-between items-center mb-2">
                     <p className="text-zinc-500 font-mono text-[10px] uppercase tracking-wider">GIF Library</p>
                     <input
+                      ref={gifSearchRef}
                       type="text"
                       placeholder="Search GIFs..."
-                      onChange={(e) => fetchGifs(e.target.value)}
+                      onChange={() => fetchGifs(gifSearchRef.current?.value ?? "")}
                       className="bg-zinc-950 border border-zinc-800 rounded px-2 py-1 text-[10px] text-zinc-200 focus:outline-none focus:border-emerald-500/50 font-mono w-32"
                     />
                   </div>

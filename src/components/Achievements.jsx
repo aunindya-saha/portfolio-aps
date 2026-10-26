@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ChevronLeft, ChevronRight, ExternalLink, ArrowUpRight } from "lucide-react";
 import { useRef } from "react";
 import { PORTFOLIO_DATA } from "../data/portfolioData";
 
@@ -24,7 +25,10 @@ export const Achievements = () => {
       <div className="mb-16 flex items-end justify-between">
         <div>
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
-            Prizes <span className="text-blue-500">&</span> Achievements
+            <Link to="/achievements" className="group inline-flex items-center gap-3" title="View all achievements">
+              <span>Prizes <span className="text-blue-500">&</span> Achievements</span>
+              <ArrowUpRight className="w-6 h-6 text-blue-500 opacity-60 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+            </Link>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
         </div>
@@ -39,7 +43,7 @@ export const Achievements = () => {
       </div>
 
       <div ref={scrollRef} className="[&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] flex overflow-x-auto snap-x snap-mandatory gap-6 pb-4">
-        {PORTFOLIO_DATA.achievements.map((item, index) => (
+        {PORTFOLIO_DATA.achievements.filter((a) => a.featured).map((item, index) => (
           <motion.div
             key={item.id}
             initial={{ opacity: 0, y: 30 }}
@@ -68,6 +72,16 @@ export const Achievements = () => {
               <p className="text-xs text-zinc-400 line-clamp-4 leading-relaxed">
                 {item.description}
               </p>
+              {item.link && (
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex items-center gap-1 text-xs font-mono text-blue-500 hover:underline"
+                >
+                  {item.linkLabel || "View Credential"} <ExternalLink className="w-3 h-3" />
+                </a>
+              )}
             </div>
           </motion.div>
         ))}

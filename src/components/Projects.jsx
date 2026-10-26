@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { ExternalLink, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ExternalLink, Star, ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import { useRef, useState } from "react";
 import { PORTFOLIO_DATA } from "../data/portfolioData";
 
@@ -51,7 +52,10 @@ export const Projects = () => {
       <div className="mb-6 flex items-end justify-between">
         <div>
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-slate-800 dark:text-zinc-100">
-            Featured <span className="text-blue-500">Projects</span>
+            <Link to="/projects" className="group inline-flex items-center gap-3" title="View all projects">
+              <span>Featured <span className="text-blue-500">Projects</span></span>
+              <ArrowUpRight className="w-6 h-6 text-blue-500 opacity-60 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+            </Link>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
         </div>
@@ -72,7 +76,7 @@ export const Projects = () => {
       </div>
 
       <div ref={scrollRef} className="[&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] flex overflow-x-auto snap-x snap-mandatory gap-6 pb-4">
-        {PORTFOLIO_DATA.projects.map((project, index) => (
+        {PORTFOLIO_DATA.projects.filter((p) => p.featured).map((project, index) => (
           <div
             key={project.id}
             className="flex-shrink-0 min-w-[340px] max-w-[380px] flex flex-col rounded-xl border border-white/10 bg-zinc-900/50 overflow-hidden hover:border-blue-500/50 transition-colors snap-center"
@@ -114,16 +118,18 @@ export const Projects = () => {
                   <img src="https://cdn.simpleicons.org/github/1c1c1c" alt="GitHub" loading="lazy" className="w-3 h-3 dark:hidden" />
                   Source
                 </a>
-                <a
-                  href={project.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center flex-1 gap-2 px-3 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-all text-xs font-medium"
-                  aria-label="Live Demo"
-                >
-                  <ExternalLink className="w-3 h-3" />
-                  Live Demo
-                </a>
+                {project.live && (
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center flex-1 gap-2 px-3 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-all text-xs font-medium"
+                    aria-label="Live Demo"
+                  >
+                    <ExternalLink className="w-3 h-3" />
+                    Live Demo
+                  </a>
+                )}
               </div>
             </div>
           </div>

@@ -43,15 +43,16 @@ export const Contact = () => {
       email: emailRef.current.value,
       message: messageRef.current.value,
     };
+    // Show the confirmation instantly - the visitor should not have to wait for the server.
     setStatus("success");
     setErrorMsg("");
 
-    // Clear fields imperatively — zero re-renders
+    // Clear fields imperatively - zero re-renders
     nameRef.current.value = "";
     emailRef.current.value = "";
     messageRef.current.value = "";
 
-    // Fire and forget fetch
+    // Fire and forget. Failures are logged on the server as EMAIL_Exxx (see Vercel logs).
     fetch("/api/email", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -91,7 +92,7 @@ export const Contact = () => {
                   type="text"
                   name="name"
                   required
-                  placeholder="John Doe"
+                  placeholder="Mr. Trump"
                   className="w-full bg-slate-100/50 dark:bg-zinc-900/50 border border-slate-200 dark:border-zinc-800 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-slate-800 dark:text-zinc-200"
                 />
               </div>
@@ -102,7 +103,7 @@ export const Contact = () => {
                   type="email"
                   name="email"
                   required
-                  placeholder="john@example.com"
+                  placeholder="helloworld@example.com"
                   className="w-full bg-slate-100/50 dark:bg-zinc-900/50 border border-slate-200 dark:border-zinc-800 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-slate-800 dark:text-zinc-200"
                 />
               </div>

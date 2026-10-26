@@ -1,23 +1,68 @@
 import { motion } from "framer-motion";
 
+// Placeholder picture for every chapter — replace with your own photo later.
+const PLACEHOLDER_IMAGE = "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800";
+
+const linkClass = "text-blue-500 hover:underline font-normal";
+
 const STORY_PAGES = [
   {
     id: 1,
-    title: "The Early Days",
-    content: "My fascination with technology began when I dismantled my first computer at age 10. Driven by curiosity, I wanted to understand the invisible logic that powered the digital world. This spark eventually grew into a passion for software development and artificial intelligence.",
-    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800"
+    title: "Where It Started",
+    content: (
+      <>
+        I completed my undergraduate degree in Computer Science and Engineering at the{" "}
+        <a href="https://mist.ac.bd/" target="_blank" rel="noopener noreferrer" className={linkClass}>
+          Military Institute of Science and Technology (MIST)
+        </a>
+        , Dhaka. My thesis was supervised by Nusrat Sharmin ma&apos;am, who guided me through the hardest, most rewarding
+        stretch of my university life. Today I continue to work with her as a Research Assistant under Associate
+        Professor Dr. Nusrat Sharmin, turning what began as a thesis into a long-term research journey.
+      </>
+    ),
+    image: PLACEHOLDER_IMAGE
   },
   {
     id: 2,
-    title: "Academic Pursuits",
-    content: "During my university years, I dove deep into computer science principles. It wasn't just about writing code; it was about solving complex problems efficiently. I led several research initiatives focusing on machine learning and computer vision, cementing my desire to operate at the cutting edge of AI.",
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800"
+    title: "The Research Side",
+    content: (
+      <>
+        Research has become the thread that ties my work together. I have worked hands-on with PyTorch, TensorFlow,
+        Scikit-learn, OpenCV, Hugging Face, QLoRA, XGBoost, SHAP, Sentence-BERT, ChromaDB and YOLO, and my questions
+        have travelled across several domains: medical image classification, computer vision, NLP and job
+        recommendation, retrieval-augmented generation, explainable and fair AI, and the effect of generative AI on how
+        students learn. My thesis compared LLM-driven and traditional hyperparameter optimization for imbalanced
+        medical images, and my first two papers reached IEEE ICCIT 2025.
+      </>
+    ),
+    image: PLACEHOLDER_IMAGE
   },
   {
     id: 3,
-    title: "Building the Future",
-    content: "Today, I bridge the gap between academic AI research and practical, scalable engineering. From deploying neural networks to edge devices to leading full-stack engineering teams, my mission is to build intelligent systems that are as robust as they are innovative.",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800"
+    title: "The Development Phase",
+    content: (
+      <>
+        Before research took the lead, I learned by building. I shipped full-stack apps with React, Node.js, Express,
+        MongoDB and PostgreSQL, a cross-platform student network in Flutter, and a desktop management tool in JavaFX.
+        Later came FastAPI and Flask backends, Docker, and AWS CI/CD pipelines during my industrial traineeship at JB
+        Connect Ltd. Those years taught me that a model only matters once real people can use it, and that habit still
+        shapes how I build.
+      </>
+    ),
+    image: PLACEHOLDER_IMAGE
+  },
+  {
+    id: 4,
+    title: "What Drives Me Now",
+    content: (
+      <>
+        I am most drawn to deep learning and trustworthy AI: models that are not only accurate, but explainable, fair,
+        and honest about what they do not know. I want to build systems people can rely on, in places like healthcare,
+        agriculture and education where mistakes carry real cost. The story is still being written, and I am excited
+        for the chapters ahead.
+      </>
+    ),
+    image: PLACEHOLDER_IMAGE
   }
 ];
 

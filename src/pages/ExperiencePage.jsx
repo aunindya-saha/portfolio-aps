@@ -2,82 +2,77 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ExternalLink } from "lucide-react";
 
 // ─── Data ──────────────────────────────────────────────────────────────────────
 
 const CATEGORIES = [
   {
-    id: "software",
-    label: "Software Development",
+    id: "professional",
+    label: "Professional Experience",
     icon: "💻",
     accent: "from-blue-500 to-cyan-500",
     entries: [
       {
         id: "exp-1",
-        title: "Senior AI Researcher",
-        company: "Neural Dynamics Lab",
-        year: "2024 – Present",
-        desc: "Leading research on large language models and computer vision pipelines.",
+        title: "Research Assistant",
+        company: "Dept. of CSE, MIST, Dhaka, Bangladesh",
+        year: "Oct 2026 – Present",
+        desc: "Working as a Research Assistant under Associate Professor Dr. Nusrat Sharmin at the Department of Computer Science and Engineering, MIST.",
         details: [
-          "Architected and deployed a multi-modal neural network serving 10M+ daily inferences.",
-          "Published 2 peer-reviewed papers on parameter-efficient fine-tuning (PEFT) methods.",
-          "Mentored a team of 4 junior data scientists and ML engineers.",
+          "Vision-based pipeline for Atmospheric Visibility & AQI Estimation: developing an end-to-end computer vision pipeline that estimates Air Quality Index (AQI) and PM2.5 concentrations from real-world outdoor imagery, surpassing baseline VGG-16 transfer learning benchmarks.",
         ],
+        links: [{ label: "MIST", href: "https://mist.ac.bd/" }],
         image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=800",
       },
       {
         id: "exp-2",
-        title: "Full-Stack Engineer",
-        company: "TechNova Solutions",
-        year: "2022 – 2024",
-        desc: "Built high-performance, scalable web applications and data dashboards.",
+        title: "Industrial Trainee (AI Development)",
+        company: "JB Connect Ltd., Dhaka, Bangladesh",
+        year: "May 2024 – Jun 2024",
+        desc: "Industrial training in AI development, working in an agile software engineering team.",
         details: [
-          "Led migration from monolith to React/Next.js microservices stack.",
-          "Optimised database queries — average load times reduced by 40%.",
-          "Integrated real-time WebSocket features for collaborative tools.",
+          "Collaborated in an agile software engineering workflow to build a full-stack conversational AI app (React, Flask).",
+          "Configured automated AWS CI/CD deployment and testing pipelines via Docker.",
+        ],
+        links: [
+          { label: "Code", href: "https://github.com/aunindya-saha/JBC-Agentica" },
+          { label: "Live", href: "https://jbc-agentica.vercel.app/" },
+          { label: "JB Connect Ltd.", href: "https://www.jbc-ltd.com/" },
         ],
         image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800",
       },
     ],
   },
   {
-    id: "volunteer",
-    label: "Volunteer & Mentorship",
-    icon: "🤝",
-    accent: "from-emerald-500 to-teal-500",
-    entries: [
-      {
-        id: "vol-1",
-        title: "Tech Mentor",
-        company: "Code for Tomorrow",
-        year: "2021 – Present",
-        desc: "Mentoring underprivileged students in web development and basic programming.",
-        details: [
-          "Conducted weekly workshops for 50+ students on modern JavaScript.",
-          "Organised community hackathons with 200+ participants.",
-        ],
-        image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800",
-      },
-    ],
-  },
-  {
-    id: "club",
-    label: "Club Activities",
+    id: "leadership",
+    label: "Leadership & Co-curricular",
     icon: "🏛️",
     accent: "from-purple-500 to-pink-500",
     entries: [
       {
-        id: "club-1",
-        title: "President",
-        company: "University AI Society",
-        year: "2022 – 2023",
-        desc: "Led the largest technical club on campus, focusing on AI and Machine Learning.",
+        id: "lead-1",
+        title: "President & Debate Captain",
+        company: "MIST Debating Society",
+        year: "Apr 2024 – Jun 2025",
+        desc: "Led the MIST Debating Society as President and Debate Captain.",
         details: [
-          "Hosted the university's first AI summit featuring industry leaders.",
-          "Grew club membership by 150% in one academic year.",
+          "Directed MIST's first Inter-University Debate Tournament.",
         ],
+        links: [{ label: "Certificate", href: "https://drive.google.com/file/d/1hgSMSmsSbOsz4AmXbBStnT80z9LJIwan/view?usp=sharing" }],
         image: "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=800",
+      },
+      {
+        id: "lead-2",
+        title: "Vice President (Event Management) & Core Organizer",
+        company: "MIST Computer Club & LeetCon National Hackathon",
+        year: "Mar 2024 – Jun 2025",
+        desc: "Managed events and cross-team operations for the MIST Computer Club and its flagship competitions.",
+        details: [
+          "Led technical community management and cross-team collaboration for the LeetCon National Hackathon and the MIST Programming Contest.",
+        ],
+        links: [{ label: "Certificate", href: "https://drive.google.com/file/d/1GbbKu9dVrX2vCLNqUc7sgF6C3dzvdmz_/view?usp=sharing" }],
+        image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800",
       },
     ],
   },
@@ -130,6 +125,22 @@ const EntryCard = ({ entry, index }) => (
           </li>
         ))}
       </ul>
+
+      {entry.links?.length > 0 && (
+        <div className="flex flex-wrap gap-2 mt-4">
+          {entry.links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 px-3 py-1 rounded-full border border-slate-200 dark:border-zinc-700 text-xs font-mono text-blue-500 hover:border-blue-500/50 transition-colors"
+            >
+              {l.label} <ExternalLink className="w-3 h-3" />
+            </a>
+          ))}
+        </div>
+      )}
     </div>
   </motion.div>
 );
