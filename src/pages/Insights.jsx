@@ -1,8 +1,5 @@
 import { motion } from "framer-motion";
 
-// Placeholder picture for every chapter — replace with your own photo later.
-const PLACEHOLDER_IMAGE = "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800";
-
 const linkClass = "text-blue-500 hover:underline font-normal";
 
 const STORY_PAGES = [
@@ -19,8 +16,7 @@ const STORY_PAGES = [
         stretch of my university life. Today I continue to work with her as a Research Assistant under Associate
         Professor Dr. Nusrat Sharmin, turning what began as a thesis into a long-term research journey.
       </>
-    ),
-    image: PLACEHOLDER_IMAGE
+    )
   },
   {
     id: 2,
@@ -34,8 +30,7 @@ const STORY_PAGES = [
         students learn. My thesis compared LLM-driven and traditional hyperparameter optimization for imbalanced
         medical images, and my first two papers reached IEEE ICCIT 2025.
       </>
-    ),
-    image: PLACEHOLDER_IMAGE
+    )
   },
   {
     id: 3,
@@ -48,8 +43,7 @@ const STORY_PAGES = [
         Connect Ltd. Those years taught me that a model only matters once real people can use it, and that habit still
         shapes how I build.
       </>
-    ),
-    image: PLACEHOLDER_IMAGE
+    )
   },
   {
     id: 4,
@@ -58,11 +52,10 @@ const STORY_PAGES = [
       <>
         I am most drawn to deep learning and trustworthy AI: models that are not only accurate, but explainable, fair,
         and honest about what they do not know. I want to build systems people can rely on, in places like healthcare,
-        agriculture and education where mistakes carry real cost. The story is still being written, and I am excited
-        for the chapters ahead.
+        agriculture and education where mistakes carry real cost. From January I will also be teaching, and I am looking
+        forward to helping the next batch of students learn AI the way I wish I had: by building things that work.
       </>
-    ),
-    image: PLACEHOLDER_IMAGE
+    )
   }
 ];
 
@@ -72,53 +65,42 @@ export const Insights = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="max-w-5xl mx-auto py-12 space-y-24"
+      className="max-w-6xl mx-auto py-12 grid gap-10 lg:gap-16 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] items-start"
     >
-      <div className="text-center">
-        <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight">
-          My <span className="text-blue-500">Story</span>
-        </h1>
-        <p className="text-slate-600 dark:text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
-          Beyond the code and the commits, here is a glimpse into my journey, the philosophies that drive me, and the milestones that defined my path.
-        </p>
-      </div>
+      <figure className="md:sticky md:top-24 mx-auto w-full max-w-sm md:max-w-none">
+        <div className="aspect-[2/3] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-stone-200 dark:ring-zinc-800">
+          <img
+            src="/farewell.jpeg"
+            alt="Aunindya Prosad Saha in a black panjabi with a white scarf, standing in the MIST campus courtyard on graduation day"
+            className="w-full h-full object-cover object-[50%_30%]"
+          />
+        </div>
+        <figcaption className="mt-3 text-sm text-slate-500 dark:text-zinc-500">
+          Farewell day at MIST, 2026.
+        </figcaption>
+      </figure>
 
-      <div className="space-y-32">
-        {STORY_PAGES.map((story, index) => {
-          const isEven = index % 2 === 0;
-          return (
-            <motion.div
-              key={story.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
-              className={`flex flex-col md:flex-row gap-12 lg:gap-20 items-center ${isEven ? '' : 'md:flex-row-reverse'}`}
-            >
-              <div className="w-full md:w-1/2 aspect-square lg:aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl relative group">
-                <img 
-                  src={story.image} 
-                  alt={story.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-500" />
-              </div>
-              
-              <div className="w-full md:w-1/2 space-y-6">
-                <div className="text-blue-500 font-mono text-sm tracking-widest font-bold">
-                  CHAPTER 0{story.id}
-                </div>
-                <h2 className="text-3xl md:text-4xl font-bold text-slate-800 dark:text-zinc-100">
-                  {story.title}
-                </h2>
-                <div className="w-12 h-1 bg-blue-500 rounded-full" />
-                <p className="text-lg text-slate-600 dark:text-zinc-400 leading-relaxed font-light">
-                  {story.content}
-                </p>
-              </div>
-            </motion.div>
-          );
-        })}
+      <div className="space-y-14">
+        <header>
+          <h1 className="sr-only">My Story</h1>
+          <p className="text-slate-600 dark:text-zinc-400 text-lg font-light leading-relaxed max-w-prose">
+            Beyond the code and the commits, here is where I am, where I am headed next, and how I got here.
+          </p>
+        </header>
+
+        <div className="space-y-10">
+          {STORY_PAGES.map((story) => (
+            <section key={story.id} className="space-y-3">
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-800 dark:text-zinc-100">
+                <span className="text-blue-500 mr-3 tabular-nums">{story.id}</span>
+                {story.title}
+              </h2>
+              <p className="text-lg text-slate-600 dark:text-zinc-400 leading-relaxed font-light max-w-prose">
+                {story.content}
+              </p>
+            </section>
+          ))}
+        </div>
       </div>
     </motion.div>
   );

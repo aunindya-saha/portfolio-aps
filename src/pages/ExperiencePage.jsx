@@ -14,6 +14,19 @@ const CATEGORIES = [
     accent: "from-blue-500 to-cyan-500",
     entries: [
       {
+        id: "exp-isu",
+        title: "Adjunct Lecturer",
+        company: "Dept. of AI and Data Science, International Standard University (ISU), Dhaka",
+        year: "Joining Jan 2027",
+        desc: "Joining the Department of Artificial Intelligence and Data Science at International Standard University as an Adjunct Lecturer. Classes begin in January.",
+        details: [
+          "Location: 69 C/A Bir Uttam A. K. Khandokar Road, Mohakhali, Dhaka 1212.",
+        ],
+        links: [{ label: "ISU", href: "https://www.isu.ac.bd/" }],
+        image: "/logos/isu-logo.png",
+        logo: true,
+      },
+      {
         id: "exp-1",
         title: "Research Assistant",
         company: "Dept. of CSE, MIST, Dhaka, Bangladesh",
@@ -23,7 +36,8 @@ const CATEGORIES = [
           "Vision-based pipeline for Atmospheric Visibility & AQI Estimation: developing an end-to-end computer vision pipeline that estimates Air Quality Index (AQI) and PM2.5 concentrations from real-world outdoor imagery, surpassing baseline VGG-16 transfer learning benchmarks.",
         ],
         links: [{ label: "MIST", href: "https://mist.ac.bd/" }],
-        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=800",
+        image: "/logos/mist-logo.png",
+        logo: true,
       },
       {
         id: "exp-2",
@@ -40,7 +54,8 @@ const CATEGORIES = [
           { label: "Live", href: "https://jbc-agentica.vercel.app/" },
           { label: "JB Connect Ltd.", href: "https://www.jbc-ltd.com/" },
         ],
-        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800",
+        image: "/logos/jbc-logo.svg",
+        logo: true,
       },
     ],
   },
@@ -51,6 +66,19 @@ const CATEGORIES = [
     accent: "from-purple-500 to-pink-500",
     entries: [
       {
+        id: "lead-0",
+        title: "Central Debate Captain",
+        company: "MIST (Military Institute of Science and Technology)",
+        year: "Sep 2024 – Jun 2025",
+        desc: "Served as the Central Debate Captain of MIST, representing the whole institute in debating.",
+        details: [
+          "Led MIST's debating activities at the institute level.",
+        ],
+        links: [{ label: "MIST", href: "https://mist.ac.bd/" }],
+        image: "/logos/mist-logo.png",
+        logo: true,
+      },
+      {
         id: "lead-1",
         title: "President & Debate Captain",
         company: "MIST Debating Society",
@@ -60,7 +88,8 @@ const CATEGORIES = [
           "Directed MIST's first Inter-University Debate Tournament.",
         ],
         links: [{ label: "Certificate", href: "https://drive.google.com/file/d/1hgSMSmsSbOsz4AmXbBStnT80z9LJIwan/view?usp=sharing" }],
-        image: "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=800",
+        image: "/logos/MISTDS.jpg",
+        logo: true,
       },
       {
         id: "lead-2",
@@ -72,7 +101,9 @@ const CATEGORIES = [
           "Led technical community management and cross-team collaboration for the LeetCon National Hackathon and the MIST Programming Contest.",
         ],
         links: [{ label: "Certificate", href: "https://drive.google.com/file/d/1GbbKu9dVrX2vCLNqUc7sgF6C3dzvdmz_/view?usp=sharing" }],
-        image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800",
+        image: "/logos/mcc-logo.png",
+        logo: true,
+        logoDark: true,
       },
     ],
   },
@@ -94,7 +125,7 @@ const EntryCard = ({ entry, index }) => (
         <img
           src={entry.image}
           alt={entry.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className={entry.logo ? `w-full h-full object-contain p-4 ${entry.logoDark ? "bg-zinc-900" : "bg-white"}` : "w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"}
         />
       ) : (
         <div className="w-full h-full flex items-center justify-center text-slate-400 font-mono text-xs">
