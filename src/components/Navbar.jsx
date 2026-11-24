@@ -41,7 +41,7 @@ export const Navbar = ({ darkMode, setDarkMode }) => {
       className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
     >
       {/* Floating pill container */}
-      <div className="flex items-center justify-between gap-6 px-5 py-2.5 rounded-full backdrop-blur-md bg-white/70 dark:bg-zinc-900/70 border border-slate-200/60 dark:border-zinc-700/60 shadow-xl shadow-black/10 pointer-events-auto w-full max-w-3xl">
+      <div className="flex items-center justify-between gap-6 px-5 py-2.5 rounded-full backdrop-blur-md bg-white/70 dark:bg-zinc-900/70 border border-slate-200/60 dark:border-zinc-700/60 shadow-xl shadow-black/10 pointer-events-auto w-full max-w-3xl md:max-w-4xl">
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 shrink-0 group">
@@ -55,7 +55,7 @@ export const Navbar = ({ darkMode, setDarkMode }) => {
         </Link>
 
         {/* Desktop nav — hidden on mobile */}
-        <nav className="hidden md:flex rounded-full backdrop-blur-md px-8 py-1.5 items-center justify-center gap-6 dark:text-white text-black bg-white/50 dark:bg-zinc-900/50 shadow-lg w-fit">
+        <nav className="hidden md:flex rounded-full backdrop-blur-md px-6 lg:px-8 py-1.5 items-center justify-center gap-4 lg:gap-6 whitespace-nowrap dark:text-white text-black bg-white/50 dark:bg-zinc-900/50 shadow-lg w-fit">
           {/* Anchor Links for Landing Page sections */}
           {ANCHOR_LINKS.map(({ label, hash }) => (
             <a

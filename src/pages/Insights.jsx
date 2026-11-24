@@ -65,9 +65,9 @@ export const Insights = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="max-w-6xl mx-auto py-12 grid gap-10 lg:gap-16 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] items-start"
+      className="max-w-6xl mx-auto pt-32 pb-24 px-4 grid gap-10 lg:gap-16 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] items-start"
     >
-      <figure className="md:sticky md:top-24 mx-auto w-full max-w-sm md:max-w-none">
+      <figure className="md:sticky md:top-32 mx-auto w-full max-w-sm md:max-w-none">
         <div className="aspect-[2/3] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-stone-200 dark:ring-zinc-800">
           <img
             src="/farewell.jpeg"
